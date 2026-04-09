@@ -1,3 +1,24 @@
-<a href="/ATG History.pdf" download="filename-for-user.pdf">
-  <button>Download PDF</button>
-</a>
+<button onclick="downloadZip()">Download ZIP</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+  async function downloadZip() {
+    const zip = new JSZip();
+
+    // Add files to the ZIP
+    zip.file("hello.txt", "Hello from file 1!");
+    zip.file("data.json", JSON.stringify({ name: "example", value: 42 }));
+
+    // Add a subfolder
+    const folder = zip.folder("images");
+    // folder.file("photo.jpg", imageBlob); // add blobs/files here
+
+    // Generate and trigger download
+    const blob = await zip.generateAsync({ type: "blob" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "Digital Marketing Agency Request for Proposal.zip";
+    link.click();
+    URL.revokeObjectURL(link.href); // clean up memory
+  }
+</script>
