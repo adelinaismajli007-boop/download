@@ -17,7 +17,7 @@
     const blob = await zip.generateAsync({ type: "blob" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "Digital Marketing Agency Request for Proposal.zip";
+    link.download = "Digital Marketing Agency Request for Proposal (RFP).zip";
     link.click();
     URL.revokeObjectURL(link.href); // clean up memory
   }
